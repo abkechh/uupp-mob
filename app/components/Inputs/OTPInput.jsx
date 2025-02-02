@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   input: {
     width: width * 0.12,
     height: width * 0.12,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 12,
     fontSize: width * 0.058,
@@ -73,15 +73,7 @@ const styles = StyleSheet.create({
   inputFilled: {
     backgroundColor: '#f0f9ff', // Light blue background
     borderColor: '#3b82f6', // Blue border
-    color: '#1e40af', // Darker blue text
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 2,
+    color: '#1e40af', // Darker blue text 
   },
 });
 
