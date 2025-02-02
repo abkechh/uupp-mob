@@ -1,7 +1,8 @@
 import { Text, View, StyleSheet, SafeAreaView, Dimensions } from "react-native";
 import OTPInput from "@/app/components/Inputs/OTPInput";
 import OnBoardingButton from "@/app/components/Buttons/OnBoardingButton";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 export default function VerifyOTPScreen() {
@@ -31,8 +32,10 @@ export default function VerifyOTPScreen() {
           textStyle={undefined}
         />
         <View style={styles.backToLoginContainer}>
-          <Ionicons name="arrow-back" size={24} color="#000" />
-          <Text style={styles.backToLoginText}>Back to Login</Text>
+          <TouchableOpacity style={styles.backToLoginContainer}>
+            <Ionicons name="arrow-back" size={24} color="#000" />
+            <Text style={styles.backToLoginText}>Back to Login</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
