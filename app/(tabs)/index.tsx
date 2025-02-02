@@ -10,11 +10,12 @@ import PhoneNumberInput from "@/app/components/Inputs/PhoneNumberInput";
 import CompanyStampWithIcon from "@/app/components/Stamp/CompanyStampWithIcon";
 import { Text, TouchableOpacity, Dimensions } from "react-native";
 import LoginScreen from "@/app/screens/LoginScreen/LoginScreen";
+import VerifyOTPScreen from "@/app/screens/LoginScreen/VerifyOTPScreen";
 const { width, height } = Dimensions.get("window");
 
 export default function HomeScreen() {
   return (
-   <LoginScreen />
+   <VerifyOTPScreen />
   );
 }
 
