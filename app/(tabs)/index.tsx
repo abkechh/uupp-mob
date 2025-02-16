@@ -12,14 +12,12 @@ import { Text, TouchableOpacity, Dimensions } from "react-native";
 import LoginScreen from "@/app/screens/LoginScreen/LoginScreen";
 import VerifyOTPScreen from "@/app/screens/LoginScreen/VerifyOTPScreen";
 import OnBoading from "@/app/screens/LoginScreen/onboarding/OnBoading";
-import DOB from "@/app/screens/LoginScreen/onboarding/DOB";
 const { width, height } = Dimensions.get("window");
 
 export default function HomeScreen() {
   return (
     // <VerifyOTPScreen />
     // <LoginScreen />
-    // <OnBoading />
-    <DOB />
+    <OnBoading />
   );
 }

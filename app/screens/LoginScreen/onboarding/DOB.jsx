@@ -1,6 +1,7 @@
 import { View, StyleSheet, StatusBar, Text } from "react-native";
 import CustomDropDown from "@/app/components/Inputs/CutsomDropDown";
 import { MaterialIcons } from "@expo/vector-icons";
+import OnBoardingButton from "@/app/components/Buttons/OnBoardingButton";
 export default function DOB() {
   // Generate days 01-31 with padding
   const days = Array.from({ length: 31 }, (_, i) => {
@@ -63,11 +64,22 @@ export default function DOB() {
           onSelect={(option) => console.log(option.value)}
         />
       </View>
+      <OnBoardingButton title="Next" onPress={() => {}} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
+    paddingTop: 24,
+    paddingBottom: 24,
+    width: "90%",
+    borderWidth: 1,
+    borderColor: "#E0E0E0",
+    borderRadius: 8,
+    alignItems: "center",
+  },
   dobContainer: {
     width: "100%",
     paddingHorizontal: 24,
@@ -75,11 +87,7 @@ const styles = StyleSheet.create({
     gap: 16,
     flexDirection: "row",
     justifyContent: "space-between",
-  },
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    marginTop: 48,
+    marginBottom: 16,
   },
   headerContainer: {
     paddingHorizontal: 24,

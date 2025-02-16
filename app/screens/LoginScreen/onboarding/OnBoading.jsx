@@ -39,6 +39,13 @@ export default function OnBoading() {
       {currentStep === 1 && <NameAndPic />}
       {currentStep === 2 && <DOB />}
       {currentStep === 3 && <Email />}
+      {/* //This is to be removed */}
+      <Text
+        style={styles.skipText}
+        onPress={() => setCurrentStep(currentStep + 1)}
+      >
+        Next
+      </Text>
     </View>
   );
 }
@@ -46,7 +53,7 @@ export default function OnBoading() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 24,
+    marginTop: 48,
     // justifyContent: "center",
     alignItems: "center",
     width: "100%",

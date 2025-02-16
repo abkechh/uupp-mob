@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "#333",
     marginBottom: 8,
+    marginLeft: 8,
   },
   dropdownWrapper: {
     position: "relative",
