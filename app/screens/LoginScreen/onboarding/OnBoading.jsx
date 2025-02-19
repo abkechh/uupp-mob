@@ -35,6 +35,7 @@ export default function OnBoading() {
           </Text>
         </View>
       </View>
+      {/* //comment */}
 
       {currentStep === 1 && <NameAndPic />}
       {currentStep === 2 && <DOB />}
