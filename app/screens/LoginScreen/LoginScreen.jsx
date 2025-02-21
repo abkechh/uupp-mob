@@ -1,94 +1,117 @@
-import { Text, View, StyleSheet, SafeAreaView, Dimensions } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  SafeAreaView,
+  Dimensions,
+  Image,
+} from "react-native";
 import CompanyLogo from "@/app/components/Logo/CompanyLogo";
 import OnBoardingButton from "@/app/components/Buttons/OnBoardingButton";
 import PhoneNumberInput from "@/app/components/Inputs/PhoneNumberInput";
+import { colors, spacing, typography } from "@/app/theme";
+import termsContent from "./TermsAndConditionScreens/termsContent";
+import privacyContent from "./TermsAndConditionScreens/privacyContent";
 const { width, height } = Dimensions.get("window");
 
 export default function LoginScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.contentContainer}>
-        <View style={styles.companyLogoContainer}>
-          <CompanyLogo size={64} borderRadius={10} />
+        <View style={styles.logoContainer}>
+          <CompanyLogo />
         </View>
-        <View style={styles.pageTitleContainer}>
-          <Text style={styles.pageTitle}>Create Account</Text>
-          <Text style={styles.pageSubtitle}>Join us! Create your account</Text>
-        </View>
-        <View style={styles.phoneNumberInputContainer}>
-          <PhoneNumberInput
-            value={undefined}
-            onChangeText={undefined}
-            error={undefined}
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <OnBoardingButton
-            title="Create Account"
-            onPress={() => {
-              navigation.navigate("explore");
-            }}
-            buttonStyle={undefined}
-            textStyle={undefined}
-          />
+        <View style={styles.inputContainer}>
+          <PhoneNumberInput />
+          <View style={styles.buttonContainer}>
+            <OnBoardingButton
+              title="Continue with Phone"
+              onPress={() => navigation.navigate("Home")}
+              buttonStyle={{
+                backgroundColor: colors.primary,
+                paddingVertical: spacing.large,
+                borderRadius: 8,
+              }}
+            >
+              <Text style={styles.buttonText}>Continue with Phone</Text>
+            </OnBoardingButton>
+          </View>
         </View>
         <View style={styles.dividerContainer}>
-          <View style={styles.divider}></View>
-          <Text style={styles.dividerText}>Or continue with</Text>
-          <View style={styles.divider}></View>
+          <View style={styles.divider} />
+          <Text style={styles.dividerText}>Or Continue With</Text>
+          <View style={styles.divider} />
         </View>
-        <View style={styles.socialMediaContainer}>
-          <View style={styles.socialMediaButtonContainer}>
-            <OnBoardingButton
-              title="Continue with Google"
-              onPress={() => {}}
-              buttonStyle={{
-                backgroundColor: "#fff",
-                borderColor: "#E5E7EB",
-                borderWidth: 1,
-              }}
-              textStyle={{
-                color: "#000",
-              }}
+        <View style={styles.socialContainer}>
+          <OnBoardingButton
+            title="Google"
+            onPress={() => {}}
+            buttonStyle={{
+              backgroundColor: colors.white,
+              borderWidth: 1,
+              borderColor: colors.lightGray,
+              paddingVertical: spacing.large,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: spacing.medium,
+              borderRadius: 8,
+            }}
+          >
+            <Image
+              source={require("@/assets/images/google48.png")}
+              style={styles.socialIcon}
             />
-          </View>
-          <View style={styles.socialMediaButtonContainer}>
-            <OnBoardingButton
-              title="Continue with Apple"
-              onPress={() => {}}
-              buttonStyle={{
-                backgroundColor: "#000",
-                borderColor: "#E5E7EB",
-                borderWidth: 1,
-              }}
-              textStyle={{
-                color: "#fff",
-              }}
+            <Text>Continue with Google</Text>
+          </OnBoardingButton>
+          <OnBoardingButton
+            title="Apple"
+            onPress={() => {}}
+            buttonStyle={{
+              backgroundColor: colors.white,
+              borderWidth: 1,
+              borderColor: colors.lightGray,
+              paddingVertical: spacing.large,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: spacing.medium,
+              borderRadius: 8,
+            }}
+          >
+            <Image
+              source={require("@/assets/images/facebook50.png")}
+              style={styles.socialIcon}
             />
-          </View>
-        </View>
-
-        <View style={styles.loginLinkContainer}>
-          <Text style={styles.loginLinkText}>
-            Already have an account?{" "}
-            <Text
-              style={styles.loginLink}
-              onPress={() => navigation.navigate("Register")}
-            >
-              Login
-            </Text>
-          </Text>
+            <Text>Continue with Facebook</Text>
+          </OnBoardingButton>
         </View>
       </View>
-      <View style={styles.footerContainer}>
-        <Text style={styles.footerText}>
-          By continuing, you agree to our{" "}
-          <Text style={styles.footerLink}>Terms of Service</Text> and{" "}
-          <Text style={styles.footerLink}>Privacy Policy</Text>
-        </Text>
-        <View style={styles.footerCompanyLogoContainer}>
-          <CompanyLogo size={36} borderRadius={10} />
-          <Text style={styles.footerCompanyNameText}>UuPp</Text>
+      <View style={styles.termsContainer}>
+        <Text style={styles.termsText}>By continuing, you agree to our </Text>
+        <View style={styles.termsLinksContainer}>
+          <Text
+            style={styles.termsLink}
+            onPress={() =>
+              navigation.navigate("ContentScreen", {
+                title: "Terms & Conditions",
+                content: termsContent, // Pass terms content
+              })
+            }
+          >
+            Terms of Service
+          </Text>
+          <Text
+            style={styles.termsLink}
+            onPress={() =>
+              navigation.navigate("ContentScreen", {
+                title: "Privacy Policy",
+                content: privacyContent, // Pass privacy content
+              })
+            }
+          >
+            Privacy Policy
+          </Text>
         </View>
       </View>
     </SafeAreaView>
@@ -98,117 +121,82 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white ",
+    backgroundColor: colors.background,
     justifyContent: "space-between",
   },
-  contentContainer: {},
-  companyLogoContainer: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    alignItems: "center",
-  },
-  companyLogo: {
-    width: 100,
-    height: 100,
-  },
-  pageTitleContainer: {
-    paddingTop: 10,
-    paddingBottom: 10,
+  contentContainer: {
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: 100,
-    marginRight: "auto",
   },
-  pageTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 5,
-  },
-  pageSubtitle: {
-    fontSize: 16,
-    color: "gray",
-  },
-  phoneNumberInputContainer: {
+  logoContainer: {
     alignItems: "center",
+    justifyContent: "center",
+    marginTop: spacing.xLarge,
+  },
+  inputContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: spacing.xLarge,
   },
   buttonContainer: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    alignItems: "center",
+    marginTop: spacing.medium,
   },
   dividerContainer: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    alignItems: "center",
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "center",
-    marginLeft: 100,
-    marginRight: 100,
+    marginTop: spacing.medium,
+    width: width * 0.85,
+    alignSelf: "center",
+    marginTop: 2 * spacing.large,
   },
   divider: {
-    width: "40%",
+    flex: 1,
     height: 1,
-    backgroundColor: "#E5E7EB",
-    marginLeft: 10,
-    marginRight: 10,
+    backgroundColor: colors.lightGray,
   },
   dividerText: {
-    fontSize: 16,
-    color: "gray",
-    marginLeft: 10,
-    marginRight: 10,
+    marginHorizontal: spacing.medium,
+    color: colors.secondary,
   },
-  socialMediaContainer: {
-    paddingTop: 10,
-    paddingBottom: 10,
+  socialContainer: {
     alignItems: "center",
+    justifyContent: "center",
+    marginTop: spacing.medium,
   },
-  socialMediaButtonContainer: {
-    paddingTop: 10,
-    paddingBottom: 10,
+  socialButton: {
+    flexDirection: "row",
+    marginHorizontal: spacing.medium,
+    marginTop: spacing.medium,
+  },
+  socialIcon: {
+    width: 24,
+    height: 24,
+    marginRight: spacing.small,
+  },
+  buttonText: {
+    color: colors.white,
+    fontSize: typography.fontSizes.medium,
+    fontWeight: typography.fontWeights.medium,
+  },
+  termsContainer: {
     alignItems: "center",
-    marginLeft: 10,
-    marginRight: 10,
+    justifyContent: "center",
+    marginBottom: spacing.xLarge,
   },
-  loginLinkContainer: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    alignItems: "center",
+  termsText: {
+    fontSize: typography.fontSizes.medium,
+    color: colors.secondary,
   },
-  loginLinkText: {
-    fontSize: 16,
-    color: "gray",
-  },
-  loginLink: {
-    color: "#2563EB",
-  },
-  footerContainer: {
-    width: width,
-    marginBottom: width * 0.16,
-    alignItems: "center",
-  },
-  footerText: {
-    fontSize: 16,
-    color: "gray",
-    textAlign: "center",
-  },
-  footerLink: {
-    color: "#2563EB",
-  },
-  footerCompanyLogoContainer: {
+  termsLinksContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
+    justifyContent: "space-evenly",
+    marginTop: spacing.tiny,
   },
-  footerCompanyLogo: {
-    width: width * 0.1,
-    height: width * 0.1,
-    borderRadius: 10,
-  },
-  footerCompanyNameText: {
-    fontSize: width * 0.075,
-    color: "#bababa",
-    marginLeft: 10,
-    fontWeight: "bold",
+  termsLink: {
+    color: colors.primary,
+    fontSize: typography.fontSizes.medium,
+    marginHorizontal: spacing.medium,
   },
 });

@@ -10,12 +10,16 @@ import {
 // Get screen dimensions
 const { width, height } = Dimensions.get("window");
 
-const OnBoardingButton = ({ onPress, title, buttonStyle, textStyle }) => {
+const OnBoardingButton = ({
+  onPress,
+  title,
+  buttonStyle,
+  textStyle,
+  children,
+}) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={[styles.button, buttonStyle]}>
-        <Text style={[styles.buttonText, textStyle]}>{title}</Text>
-      </View>
+      <View style={[styles.button, buttonStyle]}>{children}</View>
     </TouchableOpacity>
   );
 };
