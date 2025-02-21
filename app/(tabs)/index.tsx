@@ -14,10 +14,15 @@ import VerifyOTPScreen from "@/app/screens/LoginScreen/VerifyOTPScreen";
 import OnBoading from "@/app/screens/LoginScreen/onboarding/OnBoading";
 const { width, height } = Dimensions.get("window");
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }: { navigation: any }) {
   return (
-    // <VerifyOTPScreen />
-    // <LoginScreen />
-    <OnBoading />
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      {/* <VerifyOTPScreen /> */}
+      {/* <LoginScreen /> */}
+      <OnBoading />
+      <TouchableOpacity onPress={() => navigation.navigate("explore")}>
+        <Text>Explore</Text>
+      </TouchableOpacity>
+    </View>
   );
 }

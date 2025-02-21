@@ -4,7 +4,7 @@ import OnBoardingButton from "@/app/components/Buttons/OnBoardingButton";
 import PhoneNumberInput from "@/app/components/Inputs/PhoneNumberInput";
 const { width, height } = Dimensions.get("window");
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.contentContainer}>
@@ -25,7 +25,9 @@ export default function LoginScreen() {
         <View style={styles.buttonContainer}>
           <OnBoardingButton
             title="Create Account"
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate("explore");
+            }}
             buttonStyle={undefined}
             textStyle={undefined}
           />
@@ -68,7 +70,13 @@ export default function LoginScreen() {
 
         <View style={styles.loginLinkContainer}>
           <Text style={styles.loginLinkText}>
-            Already have an account? <Text style={styles.loginLink}>Login</Text>
+            Already have an account?{" "}
+            <Text
+              style={styles.loginLink}
+              onPress={() => navigation.navigate("Register")}
+            >
+              Login
+            </Text>
           </Text>
         </View>
       </View>
