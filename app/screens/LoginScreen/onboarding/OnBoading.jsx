@@ -1,31 +1,54 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import NameAndPic from "./NameAndPic";
+import OnBoardingButton from "@/app/components/Buttons/OnBoardingButton";
 import DOB from "./DOB";
 import Email from "./Email";
 import Icon from "react-native-vector-icons/MaterialIcons";
-export default function OnBoading() {
+import { typography, spacing } from "@/app/theme";
+export default function OnBoading({ navigation, route }) {
+  const { username, password } = route.params;
   const [currentStep, setCurrentStep] = useState(1);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dob, setDob] = useState("");
+  const [email, setEmail] = useState("");
+  //Profile pic is to be
   const onBoardingSteps = [
     {
       title: "Create Profile",
       component: NameAndPic,
+      props: { firstName, setFirstName, lastName, setLastName },
     },
     {
       title: "Date of Birth",
       component: DOB,
+      props: { dob, setDob },
     },
     {
       title: "Verify Email",
       component: Email,
+      props: { email, setEmail },
     },
   ];
+
+  console.log("firstName", firstName);
+  console.log("lastName", lastName);
+  console.log("dob", dob);
+  console.log("email", email);
+
+  const CurrentComponent = onBoardingSteps[currentStep - 1].component;
+  const currentProps = onBoardingSteps[currentStep - 1].props;
+
   return (
     <View style={styles.container}>
       <View style={styles.stepTitleContainer}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() => setCurrentStep(currentStep - 1)}
+          onPress={() => {
+            if (currentStep > 1) setCurrentStep(currentStep - 1);
+            else navigation.goBack();
+          }}
         >
           <Icon name="arrow-back" size={24} color="#000" />
         </TouchableOpacity>
@@ -35,18 +58,24 @@ export default function OnBoading() {
           </Text>
         </View>
       </View>
-      {/* //comment */}
 
-      {currentStep === 1 && <NameAndPic />}
-      {currentStep === 2 && <DOB />}
-      {currentStep === 3 && <Email />}
-      {/* //This is to be removed */}
-      <Text
-        style={styles.skipText}
-        onPress={() => setCurrentStep(currentStep + 1)}
+      <CurrentComponent {...currentProps} />
+
+      <OnBoardingButton
+        onPress={() => {
+          if (currentStep < onBoardingSteps.length) {
+            setCurrentStep(currentStep + 1);
+          }
+          console.log("currentStep", currentStep);
+          console.log("firstName", firstName);
+          console.log("lastName", lastName);
+          console.log("dob", dob);
+          console.log("email", email);
+        }}
+        buttonStyle={styles.onBoardingButton}
       >
-        Next
-      </Text>
+        <Text style={styles.nextText}>Next</Text>
+      </OnBoardingButton>
     </View>
   );
 }
@@ -78,5 +107,13 @@ const styles = StyleSheet.create({
   stepTitle: {
     fontSize: 18,
     fontWeight: "bold",
+  },
+  onBoardingButton: {
+    marginTop: spacing.xLarge,
+  },
+  nextText: {
+    color: "white",
+    fontSize: typography.fontSizes.medium,
+    fontWeight: typography.fontWeights.bold,
   },
 });

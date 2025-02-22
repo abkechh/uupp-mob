@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import CountryPicker from "react-native-country-picker-modal";
-import { ThemedText } from "@/components/ThemedText";
 import { colors, typography, spacing } from "@/app/theme";
 const { width } = Dimensions.get("window");
 
@@ -95,8 +94,6 @@ const PhoneNumberInput = ({ value, onChangeText, error }) => {
           maxLength={11} // 10 digits + 1 space
         />
       </View>
-
-      {error && <ThemedText style={styles.errorText}>{error}</ThemedText>}
     </View>
   );
 };

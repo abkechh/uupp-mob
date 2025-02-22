@@ -10,7 +10,7 @@ import {
 import CustomTextInput from "../../../components/Inputs/CustomTextInput";
 import OnBoardingButton from "@/app/components/Buttons/OnBoardingButton";
 import AddProfilePic from "@/app/components/Buttons/AddProfilePic";
-const NameAndPic = () => {
+const NameAndPic = ({ firstName, setFirstName, lastName, setLastName }) => {
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -19,14 +19,17 @@ const NameAndPic = () => {
           placeholder="First Name"
           label="First Name"
           style={styles.input}
+          value={firstName}
+          onChangeText={setFirstName}
         />
         <CustomTextInput
           placeholder="Last Name"
           label="Last Name"
           style={styles.input}
+          value={lastName}
+          onChangeText={setLastName}
         />
       </View>
-      <OnBoardingButton title="Next" onPress={() => {}} />
     </View>
   );
 };

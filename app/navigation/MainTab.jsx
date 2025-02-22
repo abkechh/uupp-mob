@@ -1,10 +1,13 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Text, View } from "react-native";
+import { Text, View, Button } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { removeAuth } from "@/app/localStorage/localstorage";
+import useAuthStore from "@/app/store/authStore";
 const Tab = createBottomTabNavigator();
 
 export default function MainTab() {
+  const { logout } = useAuthStore();
   return (
     <Tab.Navigator
       screenOptions={{
@@ -19,6 +22,7 @@ export default function MainTab() {
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
             <Text>Home</Text>
+            <Button title="Logout" onPress={() => logout()} />
           </View>
         )}
         options={{

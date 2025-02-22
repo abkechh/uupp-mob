@@ -6,15 +6,52 @@ import {
   Dimensions,
   Image,
 } from "react-native";
+import { useState, useEffect } from "react";
 import CompanyLogo from "@/app/components/Logo/CompanyLogo";
 import OnBoardingButton from "@/app/components/Buttons/OnBoardingButton";
 import PhoneNumberInput from "@/app/components/Inputs/PhoneNumberInput";
 import { colors, spacing, typography } from "@/app/theme";
 import termsContent from "./TermsAndConditionScreens/termsContent";
 import privacyContent from "./TermsAndConditionScreens/privacyContent";
+import CustomTextInput from "@/app/components/Inputs/CustomTextInput";
+import { login } from "@/app/api/auth";
+import Spinner from "@/app/components/loaders/spinner";
+import useAuthStore from "@/app/store/authStore";
 const { width, height } = Dimensions.get("window");
+const environment = process.env.ENVIRONMENT;
 
 export default function LoginScreen({ navigation }) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { setAuthData } = useAuthStore();
+
+  const handleLogin = async () => {
+    const isRegistered = false;
+    if (isRegistered) {
+      console.log("User is registered");
+    } else {
+      try {
+        setIsLoading(true);
+        const response = await login(username, password);
+        await setAuthData(response.token, response.user);
+        console.log("Login response:", response);
+        setIsLoading(false);
+      } catch (error) {
+        console.log("Login error:", error);
+        setIsLoading(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const token = await getAuth();
+      console.log("Current token:", token);
+    };
+    checkToken();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.contentContainer}>
@@ -22,18 +59,40 @@ export default function LoginScreen({ navigation }) {
           <CompanyLogo />
         </View>
         <View style={styles.inputContainer}>
-          <PhoneNumberInput />
+          {environment === "development" ? (
+            <View style={styles.inputWrapper}>
+              <PhoneNumberInput />
+            </View>
+          ) : (
+            <View style={styles.inputWrapper}>
+              <CustomTextInput
+                placeholder="username"
+                label="Username"
+                style={styles.input}
+                value={username}
+                onChangeText={(text) => setUsername(text)}
+              />
+              <CustomTextInput
+                placeholder="password"
+                label="Password"
+                style={styles.input}
+                value={password}
+                onChangeText={(text) => setPassword(text)}
+                secureTextEntry={true}
+              />
+            </View>
+          )}
           <View style={styles.buttonContainer}>
             <OnBoardingButton
               title="Continue with Phone"
-              onPress={() => navigation.navigate("Home")}
-              buttonStyle={{
-                backgroundColor: colors.primary,
-                paddingVertical: spacing.large,
-                borderRadius: 8,
-              }}
+              onPress={handleLogin}
+              buttonStyle={styles.primaryButton}
             >
-              <Text style={styles.buttonText}>Continue with Phone</Text>
+              {isLoading ? (
+                <Spinner color={colors.white} size="small" />
+              ) : (
+                <Text style={styles.buttonText}>Continue with Phone</Text>
+              )}
             </OnBoardingButton>
           </View>
         </View>
@@ -134,12 +193,27 @@ const styles = StyleSheet.create({
     marginTop: spacing.xLarge,
   },
   inputContainer: {
+    width: width * 0.85,
     alignItems: "center",
     justifyContent: "center",
     marginTop: spacing.xLarge,
   },
+  inputWrapper: {
+    width: "100%",
+  },
+  input: {
+    marginVertical: spacing.xLarge,
+    width: "100%",
+  },
   buttonContainer: {
+    width: "100%",
     marginTop: spacing.medium,
+  },
+  primaryButton: {
+    backgroundColor: colors.primary,
+    paddingVertical: spacing.large,
+    borderRadius: 8,
+    width: "100%",
   },
   dividerContainer: {
     flexDirection: "row",

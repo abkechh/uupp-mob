@@ -1,9 +1,5 @@
 import { Image, StyleSheet, Platform, View, SafeAreaView } from "react-native";
 
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
 import OnBoardingButton from "@/app/components/Buttons/OnBoardingButton";
 import CompanyLogo from "@/app/components/Logo/CompanyLogo";
 import PhoneNumberInput from "@/app/components/Inputs/PhoneNumberInput";

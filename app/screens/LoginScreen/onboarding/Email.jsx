@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import CustomTextInput from "@/app/components/Inputs/CustomTextInput";
 import OnBoardingButton from "@/app/components/Buttons/OnBoardingButton";
-export default function Email() {
+export default function Email({ email, setEmail }) {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -11,12 +11,16 @@ export default function Email() {
       </View>
       <Text style={styles.subText}>Please enter the email address.</Text>
       <View style={styles.inputContainer}>
-        <CustomTextInput label="Email" placeholder="name@example.com" />
+        <CustomTextInput
+          label="Email"
+          placeholder="name@example.com"
+          value={email}
+          onChangeText={setEmail}
+        />
       </View>
       <TouchableOpacity style={styles.subButton}>
         <Text style={styles.subButtonText}>Skip for now</Text>
       </TouchableOpacity>
-      <OnBoardingButton title="Next" onPress={() => {}} />
     </View>
   );
 }
